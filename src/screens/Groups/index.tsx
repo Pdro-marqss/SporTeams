@@ -1,22 +1,10 @@
 import { Text, View, StyleSheet } from 'react-native';
+import { Container, Title } from './styles';
 
 export function Groups() {
    return (
-      <View style={styles.container}>
-         <Text style={styles.text}>Pagina Groups</Text>
-      </View>
+      <Container>
+         <Title>Pagina Groups</Title>
+      </Container>
    );
 }
-
-const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      backgroundColor: '#000000',
-      alignItems: 'center',
-      justifyContent: 'center',
-   },
-   text: {
-      color: '#FFFFFF',
-      fontSize: 15,
-   }
-})
