@@ -17,6 +17,6 @@ export const Subtitle = styled.Text`
    text-align: center;
 
    font-size: ${props => props.theme.FONT_SIZE.MD}px;
-   font-family: ${props => props.theme.FONT_FAMILY.REGULAR}px;
+   font-family: ${props => props.theme.FONT_FAMILY.REGULAR};
    color: ${props => props.theme.COLORS.GRAY_300};
 `;

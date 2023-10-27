@@ -1,10 +1,18 @@
+import { useState } from 'react';
+import { FlatList } from 'react-native';
+
 import { Header } from '@components/Header';
 import { Highlight } from '@components/highlight';
 import { GroupCard } from '@components/GroupCard';
+import { ListEmpty } from '@components/ListEmpty';
 
 import { Container } from './styles'; //Da pra usar Alias aqui da seguinte forma: import * as S from './styles'. E puxar os components do S -> <S.Container></S.Container>
 
+
+
 export function Groups() {
+   const [groups, setGroups] = useState<string[]>([]);
+
    return (
       <Container>
          <Header />
@@ -13,7 +21,21 @@ export function Groups() {
             subtitle='Jogue com a sua turma'
          />
 
-         <GroupCard title='Galera do LOL' />
+         <FlatList
+            data={groups}
+            keyExtractor={item => item}
+            renderItem={({ item }) => (
+               <GroupCard
+                  title={item}
+               />
+            )}
+            contentContainerStyle={groups.length === 0 && { flex: 1 }}
+            ListEmptyComponent={() => (
+               <ListEmpty
+                  message='Que tal cadastrar a primeira turma ?'
+               />
+            )}
+         />
       </Container>
    );
 }
