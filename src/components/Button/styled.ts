@@ -1,5 +1,5 @@
+import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
-import styled from "styled-components/native";
 
 export type ButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';;
 
@@ -20,8 +20,11 @@ export const Container = styled(TouchableOpacity) <ButtonProps>`
    align-items: center;
 `;
 
+//Esse helper css é uma forma de tornar mais curto a sintaxe das props
 export const Title = styled.Text`
-   font-size: ${props => props.theme.FONT_SIZE.MD}px;
-   font-family:${props => props.theme.FONT_FAMILY.BOLD};
-   color: ${props => props.theme.COLORS.WHITE};
+   ${props => css`
+      font-size: ${props.theme.FONT_SIZE.MD}px;
+      font-family:${props.theme.FONT_FAMILY.BOLD};
+      color: ${props.theme.COLORS.WHITE};
+   `};
 `;
