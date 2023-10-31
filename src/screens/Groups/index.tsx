@@ -7,6 +7,7 @@ import { GroupCard } from '@components/GroupCard';
 import { ListEmpty } from '@components/ListEmpty';
 
 import { Container } from './styles'; //Da pra usar Alias aqui da seguinte forma: import * as S from './styles'. E puxar os components do S -> <S.Container></S.Container>
+import { Button } from '@components/Button';
 
 
 
@@ -35,6 +36,10 @@ export function Groups() {
                   message='Que tal cadastrar a primeira turma ?'
                />
             )}
+         />
+
+         <Button
+            title='Criar nova turma'
          />
       </Container>
    );
