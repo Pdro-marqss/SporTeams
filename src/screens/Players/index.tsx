@@ -1,7 +1,7 @@
 //react
 import { useState, useEffect, useRef } from "react";
 import { FlatList, Alert, TextInput, Keyboard } from "react-native";
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 
 //components
 import { Header } from "@components/Header";
@@ -21,6 +21,7 @@ import { playerAddByGroup } from "@storage/players/playerAddByGroup";
 import { playersGetByGroupAndTeam } from "@storage/players/playersGetByGroupAndTeam";
 import { PlayerStorageDTO } from "@storage/players/PlayerStorageDTO";
 import { playerRemoveByGroup } from "@storage/players/playerRemoveByGroup";
+import { groupRemoveByName } from "@storage/group/groupRemoveByName";
 
 //styles
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
@@ -35,6 +36,7 @@ export function Players() {
    const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
    const [newPlayerName, setNewPlayerName] = useState('');
 
+   const navigation = useNavigation();
    const route = useRoute();
    const { group } = route.params as RouteParams;
 
@@ -95,6 +97,28 @@ export function Players() {
          console.log(error);
          Alert.alert('Remover pessoa', 'Não foi possivel remover essa pessoa.');
       }
+   }
+
+   async function groupRemove() {
+      try {
+         await groupRemoveByName(group);
+         navigation.navigate('groups');
+
+      } catch (error) {
+         console.log(error);
+         Alert.alert('Remover', 'Não foi possivel remover o grupo');
+      }
+   }
+
+   async function handleGroupRemove() {
+      Alert.alert(
+         'Remover',
+         'Deseja mesmo remover o grupo ?',
+         [
+            { text: 'Não', style: 'cancel' },
+            { text: 'Sim', onPress: () => groupRemove() }
+         ]
+      );
    }
 
    useEffect(() => {
@@ -166,6 +190,7 @@ export function Players() {
          <Button
             title="Remover turma"
             type="SECONDARY"
+            onPress={handleGroupRemove}
          />
 
 
